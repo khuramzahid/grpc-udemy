@@ -13,6 +13,7 @@ function doGreet(client) {
     }
 
     console.log(`Greet: ${res.getResult()}`);
+    client.close();
   });
 }
 
@@ -21,7 +22,6 @@ function main() {
   const client = new GreetServiceClient('localhost:50051', creds,);
 
   doGreet(client);
-  client.close();
 }
 
 main();
