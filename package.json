@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "greet:pbgen": "./scripts/gen.sh greet",
+    "pb:gen": "./scripts/gen.sh greet calculator",
     "greet:server": "node greet/server/index.js",
     "greet:client": "node greet/client/index.js",
-    "sum:pbgen": "./scripts/gen.sh sum",
-    "sum:server": "node sum/server/index.js",
-    "sum:client": "node sum/client/index.js"
+
+    "calculator:server": "node calculator/server/index.js",
+    "calculator:client": "node calculator/client/index.js"
   },
   "keywords": [],
   "author": "",

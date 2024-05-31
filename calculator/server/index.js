@@ -1,5 +1,5 @@
 const grpc = require('@grpc/grpc-js');
-const service = require('../proto/sum_grpc_pb');
+const { CalculatorServiceService } = require('../proto/calculator_grpc_pb');
 const serviceImpl = require('./service_impl');
 
 const addr = '0.0.0.0:50051';
@@ -21,7 +21,7 @@ function main() {
         cleanup(server);
     });
 
-    server.addService(service.SumServiceService, serviceImpl);
+    server.addService(CalculatorServiceService, serviceImpl);
     server.bindAsync(addr, creds, (err, _) => {
         if (err) {
             return cleanup(server);

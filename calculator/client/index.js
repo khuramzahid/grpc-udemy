@@ -1,12 +1,12 @@
 const grpc = require('@grpc/grpc-js');
-const {SumRequest} = require('../proto/sum_pb');
-const { SumServiceClient } = require('../proto/sum_grpc_pb');
+const { SumRequest } = require('../proto/sum_pb');
+const { CalculatorServiceClient } = require('../proto/calculator_grpc_pb');
 
 function doSum(client) {
   console.log('doSum was invoked');
   const req = new SumRequest()
-      .setFirst(1)
-      .setSecond(2);
+      .setFirstNumber(1)
+      .setSecondNumber(1);
 
   client.sum(req, (err, res) => {
     if (err) {
@@ -20,7 +20,7 @@ function doSum(client) {
 
 function main() {
   const creds = grpc.ChannelCredentials.createInsecure();
-  const client = new SumServiceClient('localhost:50051', creds,);
+  const client = new CalculatorServiceClient('localhost:50051', creds,);
 
   doSum(client);
 }
