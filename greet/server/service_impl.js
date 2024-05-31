@@ -7,3 +7,15 @@ exports.greet = (call, callback) => {
 
   callback(null, res);
 };
+
+exports.greetManyTimes = (call, _) => {
+  console.log('GreetManyTimes was invoked');
+  const res = new pb.GreetResponse();
+
+  for(let i=0; i<10; i++) {
+    res.setResult(`Hello ${call.request.getFirstName()} - number ${i}`);
+    call.write(res);
+  }
+
+  call.end(); // end of streaming
+};
