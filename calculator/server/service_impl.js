@@ -1,5 +1,6 @@
 const { SumResponse } = require('../proto/sum_pb');
 const { PrimeResponse } = require('../proto/primes_pb');
+const { AverageResponse } = require('../proto/average_pb');
 const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout);
 
@@ -30,4 +31,22 @@ exports.primes = async (call, _) => {
   }
 
   call.end();
+};
+
+exports.average = async (call, callback) => {
+  console.log('Average was invoked');
+  let aggregator = 0.0;
+  let count = 0;
+
+  call.on('data', (req) => {
+    aggregator += parseInt(req.getNumber());
+    count += 1;
+  });
+
+  call.on('end', () => {
+    const res = new AverageResponse()
+      .setResult(aggregator/count);
+
+    callback(null, res);
+  });
 };
