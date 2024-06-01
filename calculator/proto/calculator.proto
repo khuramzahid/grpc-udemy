@@ -3,9 +3,9 @@ syntax = "proto3";
 package calculator;
 
 import "sum.proto";
-import "prime.proto";
+import "primes.proto";
 
 service CalculatorService {
   rpc Sum(SumRequest) returns (SumResponse);
-  rpc Prime(PrimeRequest) returns (stream PrimeResponse);
+  rpc Primes(PrimeRequest) returns (stream PrimeResponse);
 }

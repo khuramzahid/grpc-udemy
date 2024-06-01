@@ -1,6 +1,6 @@
 const grpc = require('@grpc/grpc-js');
 const { SumRequest } = require('../proto/sum_pb');
-const { PrimeRequest } = require('../proto/prime_pb');
+const { PrimeRequest } = require('../proto/primes_pb');
 const { CalculatorServiceClient } = require('../proto/calculator_grpc_pb');
 
 function doSum(client) {
@@ -19,15 +19,15 @@ function doSum(client) {
   });
 }
 
-async function doPrime(client) {
-  console.log('doPrime was invoked');
+async function doPrimes(client) {
+  console.log('doPrimes was invoked');
   const req = new PrimeRequest()
-    .setNumber(120);
+    .setNumber(12390392840);
 
-  const call = await client.prime(req);
+  const call = await client.primes(req);
 
   call.on('data', (res) => {
-    console.log(`Factor: ${res.getFactor()}`);
+    console.log(`Primes: ${res.getResult()}`);
   });
 }
 
@@ -36,7 +36,7 @@ async function main() {
   const client = new CalculatorServiceClient('localhost:50051', creds,);
 
   // doSum(client);
-  await doPrime(client);
+  await doPrimes(client);
 }
 
 main();

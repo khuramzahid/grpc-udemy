@@ -6,7 +6,6 @@
     "pb:gen": "./scripts/gen.sh greet calculator",
     "greet:server": "node greet/server/index.js",
     "greet:client": "node greet/client/index.js",
-
     "calculator:server": "node calculator/server/index.js",
     "calculator:client": "node calculator/client/index.js"
   },

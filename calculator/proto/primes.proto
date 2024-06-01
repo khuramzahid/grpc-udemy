@@ -3,9 +3,9 @@ syntax = "proto3";
 package calculator;
 
 message PrimeRequest {
-  int32 number = 1;
+  int64 number = 1;
 }
 
 message PrimeResponse {
-  int32 factor = 1;
+  int64 result = 1;
 }
