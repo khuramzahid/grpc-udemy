@@ -54,16 +54,18 @@ exports.avg = async (call, callback) => {
 
 exports.max = (call, _) => {
   console.log('Max was invoked');
+
   let max = 0;
+  
   call.on('data', (req) => {
-    console.log(`received request ${req}`);
-    if(req.getNumber() > max) {
-      max = req.getNumber();
+    const number = req.getNumber();
+
+    if(number > max) {
       const res = new MaxResponse()
-        .setResult(max);
-      console.log(`Sending response ${res}`);
+        .setResult(number);
 
       call.write(res);
+      max = number;
     }
   });
 

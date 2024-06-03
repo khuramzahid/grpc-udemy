@@ -52,7 +52,8 @@ function doAvg(client) {
 
 function doMax(client) {
   console.log('doMax was invoked');
-  const numbers = [1, 5, 3, 6, 2, 20];
+
+  const numbers = [4, 7 ,2, 19, 4, 6, 32];
   const call = client.max();
 
   call.on('data', (res) => {
