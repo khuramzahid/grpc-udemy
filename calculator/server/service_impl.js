@@ -1,6 +1,7 @@
 const { SumResponse } = require('../proto/sum_pb');
 const { PrimeResponse } = require('../proto/primes_pb');
 const { AvgResponse } = require('../proto/avg_pb');
+const { MaxResponse } = require('../proto/max_pb');
 const util = require('util');
 const setTimeoutPromise = util.promisify(setTimeout);
 
@@ -49,4 +50,22 @@ exports.avg = async (call, callback) => {
 
     callback(null, res);
   });
+};
+
+exports.max = (call, _) => {
+  console.log('Max was invoked');
+  let max = 0;
+  call.on('data', (req) => {
+    console.log(`received request ${req}`);
+    if(req.getNumber() > max) {
+      max = req.getNumber();
+      const res = new MaxResponse()
+        .setResult(max);
+      console.log(`Sending response ${res}`);
+
+      call.write(res);
+    }
+  });
+
+  call.on('end', () => call.end());
 };
